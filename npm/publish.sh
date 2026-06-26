@@ -41,12 +41,17 @@ for entry in "${platforms[@]}"; do
   )
 done
 
-# Sync and publish the main package.
+# Sync and publish the main package: pin every optionalDependency to this
+# release (done in Node so scoped names like @scope/pkg are handled safely).
 npm version "$version" --no-git-tag-version --allow-same-version
-for entry in "${platforms[@]}"; do
-  IFS=":" read -r suffix _ _ <<<"$entry"
-  npm pkg set "optionalDependencies.byteback-$suffix=$version"
-done
+VER="$version" node -e "
+const fs = require('fs');
+const pkg = require('./package.json');
+for (const dep of Object.keys(pkg.optionalDependencies || {})) {
+  pkg.optionalDependencies[dep] = process.env.VER;
+}
+fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+"
 npm publish --access public
 
 echo "published byteback@$version and ${#platforms[@]} platform packages"

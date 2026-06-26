@@ -1,6 +1,6 @@
 {
-  "name": "byteback-darwin-arm64",
-  "version": "0.1.3",
+  "name": "@neolaner/byteback-darwin-arm64",
+  "version": "0.1.4",
   "description": "byteback prebuilt binary for macOS arm64.",
   "license": "MIT",
   "repository": {

@@ -10,11 +10,11 @@ const { spawnSync } = require("child_process");
 
 // platform+arch -> the optional dependency that ships that binary.
 const PLATFORM_PACKAGES = {
-  "linux x64": "byteback-linux-x64",
-  "linux arm64": "byteback-linux-arm64",
-  "darwin x64": "byteback-darwin-x64",
-  "darwin arm64": "byteback-darwin-arm64",
-  "win32 x64": "byteback-win32-x64",
+  "linux x64": "@neolaner/byteback-linux-x64",
+  "linux arm64": "@neolaner/byteback-linux-arm64",
+  "darwin x64": "@neolaner/byteback-darwin-x64",
+  "darwin arm64": "@neolaner/byteback-darwin-arm64",
+  "win32 x64": "@neolaner/byteback-win32-x64",
 };
 
 function resolveBinary() {

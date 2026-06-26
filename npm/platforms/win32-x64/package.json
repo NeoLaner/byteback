@@ -1,6 +1,6 @@
 {
-  "name": "byteback-win32-x64",
-  "version": "0.1.3",
+  "name": "@neolaner/byteback-win32-x64",
+  "version": "0.1.4",
   "description": "byteback prebuilt binary for Windows x64.",
   "license": "MIT",
   "repository": {
