@@ -5,7 +5,7 @@ pkgver=0.1.0
 pkgrel=1
 pkgdesc='A fast TUI that reclaims disk space by sweeping regenerable build/dependency directories (node_modules, .next, target, ...)'
 arch=('x86_64')
-url='https://github.com/neolaner/byteback'
+url='https://github.com/NeoLaner/byteback'
 license=('MIT')
 provides=('byteback')
 conflicts=('byteback')
@@ -14,8 +14,8 @@ options=('!strip' '!debug')
 source=("$_pkgname-$pkgver.tar.gz::$url/releases/download/v$pkgver/byteback-x86_64-unknown-linux-musl.tar.gz"
         "LICENSE-$pkgver::$url/raw/v$pkgver/LICENSE")
 # Run `updpkgsums` after a release is published to replace these with real hashes.
-sha256sums=('SKIP'
-            'SKIP')
+sha256sums=('862bee38e26fa1af620eb79d1ad643e257aa78e397849d7badf87b3a3276d3a8'
+            '52dd757b6fd6c349578d634e017fc17ffbebdef6b78961d45e90bd4d12d65723')
 
 package() {
     install -Dm755 "$srcdir/$_pkgname" "$pkgdir/usr/bin/$_pkgname"
