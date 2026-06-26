@@ -82,12 +82,11 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Sync version to tag
-        working-directory: npm
-        run: npm version --no-git-tag-version --allow-same-version "${GITHUB_REF_NAME#v}"
-
-      - name: Publish
+      - name: Publish platform packages + main package
         # Skips cleanly if the NPM_TOKEN secret is not configured.
         if: ${{ env.NODE_AUTH_TOKEN != '' }}
         working-directory: npm
-        run: npm publish --access public
+        env:
+          VERSION: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: bash publish.sh

@@ -1,6 +1,6 @@
 [package]
 name = "byteback"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "A fast TUI that reclaims disk space by sweeping regenerable build/dependency directories (node_modules, .next, target, ...)."
 license = "MIT"

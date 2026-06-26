@@ -28,21 +28,31 @@ projects — `node_modules`, `.next`, `.turbo`, `target`, `dist`, and friends.
 yay -S byteback-bin     # or: paru -S byteback-bin
 ```
 
-### npm
+### npm / pnpm / yarn
 
 ```bash
-npm install -g byteback
+npm install -g byteback     # or: pnpm add -g byteback / yarn global add byteback
 ```
 
-Installs the prebuilt binary for your platform; provides both `byteback` and the
-short `bb`.
+The prebuilt binary for your platform is delivered as a per-platform
+`optionalDependency` (no install scripts), so it works the same across npm, pnpm,
+and yarn. Provides both `byteback` and the short `bb`.
 
-### From source
+### From source / cargo
 
 ```bash
-git clone https://github.com/neolaner/byteback.git
-cd byteback
-cargo install --path .
+cargo install --git https://github.com/NeoLaner/byteback
+# or, from a clone:
+git clone https://github.com/NeoLaner/byteback.git && cd byteback && cargo install --path .
+```
+
+### Arch, while AUR signups are paused
+
+You can build the AUR package straight from this repo without an AUR account:
+
+```bash
+git clone https://github.com/NeoLaner/byteback.git
+cd byteback/packaging/aur && makepkg -si
 ```
 
 ## Usage

@@ -1,0 +1,19 @@
+{
+  "name": "byteback-linux-x64",
+  "version": "0.1.2",
+  "description": "byteback prebuilt binary for Linux x64.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeoLaner/byteback.git"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "files": [
+    "bin/"
+  ]
+}
