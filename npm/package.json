@@ -1,0 +1,32 @@
+{
+  "name": "byteback",
+  "version": "0.1.0",
+  "description": "A fast TUI that reclaims disk space by sweeping regenerable build/dependency directories (node_modules, .next, target, ...).",
+  "keywords": [
+    "tui",
+    "cleanup",
+    "disk-space",
+    "node_modules",
+    "cli"
+  ],
+  "homepage": "https://github.com/neolaner/byteback",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neolaner/byteback.git"
+  },
+  "license": "MIT",
+  "bin": {
+    "byteback": "bin/byteback.js",
+    "bb": "bin/byteback.js"
+  },
+  "files": [
+    "bin/byteback.js",
+    "install.js"
+  ],
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

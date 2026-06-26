@@ -1,35 +1,86 @@
-# oRganizer
+# byteback
 
-A simple Rust command-line tool that helps you find and delete common build artifacts and dependencies directories in your projects to free up disk space.
+> Get your bytes back.
+
+A fast terminal UI that reclaims disk space by finding and sweeping the
+regenerable build, dependency, and cache directories that pile up across your
+projects — `node_modules`, `.next`, `.turbo`, `target`, `dist`, and friends.
 
 ## Features
 
-- Recursively searches for common directories: `node_modules`, `dist`, `.next`, and `.turbo`
-- Shows all found directories before deletion
-- Requires confirmation before deleting any directories
-- Safe error handling for file system operations
+- **Full-screen dashboard** — pick which directory names to sweep, scan a tree,
+  and review every match before anything is deleted.
+- **Persistent, customizable targets** — add your own directory names (saved
+  forever) and remove built-ins you never want to see again.
+- **A clear overview** — found directories are grouped by category with path,
+  size, and file count, sorted biggest-first.
+- **Safe by default** — everything is selected for you, but you opt out of any
+  dir before deleting, and deletions go to the **system trash** unless you
+  switch to permanent.
+- **Fast** — parallel directory walking (jwalk + rayon) that prunes at every
+  match, so it scans your project tree, not the insides of `node_modules`.
+
+## Install
+
+### AUR (Arch Linux)
+
+```bash
+yay -S byteback-bin     # or: paru -S byteback-bin
+```
+
+### npm
+
+```bash
+npm install -g byteback
+```
+
+Installs the prebuilt binary for your platform; provides both `byteback` and the
+short `bb`.
+
+### From source
+
+```bash
+git clone https://github.com/neolaner/byteback.git
+cd byteback
+cargo install --path .
+```
 
 ## Usage
 
-1. Run the program
-2. Enter the base directory path to search (e.g., `.` for current directory or drag & drop folder to cli)
-3. Review the list of found directories
-4. Confirm deletion by typing 'y' (or any other key to cancel)
-
-## Building from Source
-
 ```bash
-git clone https://github.com/yourusername/orgonizer.git
-cd orgonizer
-cargo build --release
+byteback            # scan the current directory
+byteback ~/code     # scan a specific directory
+byteback --permanent # default to permanent deletion instead of trash
 ```
 
-## Running the Program
+The dashboard walks you through it:
 
-```bash
-cargo run
-```
+| Screen | Keys |
+| --- | --- |
+| **Select targets** | `↑↓` move · `space` toggle · `a` add a custom name · `r` remove a name · `c` change scan directory · `enter` scan |
+| **Review results** | `↑↓` move · `space` opt a directory out · `a` all · `n` none · `t`/`p` trash / permanent · `d` delete · `b` back |
+| Anywhere | `q` quit |
+
+After deleting you get a summary of the space reclaimed (and anything that
+couldn't be removed).
+
+## Configuration
+
+Your custom names, hidden defaults, and last selection are stored at:
+
+- Linux: `~/.config/byteback/config.toml`
+- macOS: `~/Library/Application Support/byteback/config.toml`
+- Windows: `%APPDATA%\byteback\config.toml`
+
+## How it works
+
+1. **Discover** — walk the chosen directory, recording any folder whose name is a
+   target and *not* descending into it (a nested `node_modules` inside another is
+   counted once, via the outer dir).
+2. **Measure** — sum the size and file count of each match in parallel.
+3. **Review & delete** — you confirm the selection and disposal mode; matches go
+   to the trash (recoverable) or are removed permanently.
 
 ## License
 
-MIT License
+MIT — see [LICENSE](LICENSE).
